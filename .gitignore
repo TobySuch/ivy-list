@@ -130,3 +130,6 @@ dmypy.json
 
 # Django secret
 secret.py
+
+# MacOS Specific
+.DS_Store
