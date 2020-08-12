@@ -17,3 +17,6 @@ class ToDoItem(models.Model):
     def uncomplete(self):
         self.completed_at = None
         self.save()
+
+    def __str__(self):
+        return self.title
