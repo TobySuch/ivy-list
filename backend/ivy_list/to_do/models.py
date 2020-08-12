@@ -10,6 +10,12 @@ class ToDoList(models.Model):
     def __str__(self):
         return f"{self.user.email} ({self.date.isoformat()})"
 
+    def get_completed(self):
+        return ToDoItem.objects.filter(todo_list=self, completed_at__isnull=False)
+
+    def get_not_completed(self):
+        return ToDoItem.objects.filter(todo_list=self, completed_at__isnull=True)
+
 class ToDoItem(models.Model):
     todo_list = models.ForeignKey(ToDoList, related_name="todo_items", on_delete=models.CASCADE)
     title = models.CharField(max_length=120, blank=False)

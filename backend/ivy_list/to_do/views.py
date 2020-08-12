@@ -10,6 +10,18 @@ class ToDoListViewSet(viewsets.ModelViewSet):
     serializer_class = ToDoListSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
+    @action(detail=True)
+    def completed(self, request, *args, **kwargs):
+        items = self.get_object().get_completed()
+        serializer = ToDoItemSerializer(items, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True)
+    def uncompleted(self, request, *args, **kwargs):
+        items = self.get_object().get_not_completed()
+        serializer = ToDoItemSerializer(items, many=True)
+        return Response(serializer.data)
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
