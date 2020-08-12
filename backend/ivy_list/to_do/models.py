@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+import datetime
 
 class ToDoItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="todo_items", on_delete=models.CASCADE)
@@ -8,3 +9,11 @@ class ToDoItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)
     priority = models.IntegerField(blank=False, null=False, default=1)
+
+    def complete(self):
+        self.completed_at = datetime.datetime.now()
+        self.save()
+
+    def uncomplete(self):
+        self.completed_at = None
+        self.save()
