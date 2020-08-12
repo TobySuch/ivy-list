@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from .models import ToDoItem
+from .serializers import ToDoItemSerializer
+from rest_framework import viewsets
 
-# Create your views here.
+
+class ToDoItemViewSet(viewsets.ModelViewSet):
+    queryset = ToDoItem.objects.all()
+    serializer_class = ToDoItemSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

@@ -7,4 +7,4 @@ class ToDoItem(models.Model):
     description = models.TextField(blank=True, help_text="Add more details here. You can use markdown to format it!")
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)
-    priority = models.IntegerField(blank=True, null=False)
+    priority = models.IntegerField(blank=False, null=False, default=1)
