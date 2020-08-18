@@ -3,24 +3,25 @@
     <div class="row">
       <!-- Hamburger menu to reorder to do items -->
       <div class="col-1">
-        <h3><font-awesome-icon icon="bars" /></h3>
+        <h3><font-awesome-icon icon="bars" fixed-width/></h3>
       </div>
 
       <!-- Title of to do item -->
       <div class="col">
         <h3 class="title">
           {{ item.title }}
-          <font-awesome-icon icon="caret-down" v-show="!item.description_visible" v-on:click="showDescription(item);"/>
-          <font-awesome-icon icon="caret-up" v-show="item.description_visible" v-on:click="hideDescription(item);"/>
+          <font-awesome-icon icon="caret-down" fixed-width v-show="!item.description_visible" v-on:click="showDescription(item);"/>
+          <font-awesome-icon icon="caret-up" fixed-width v-show="item.description_visible" v-on:click="hideDescription(item);"/>
         </h3>
       </div>
 
       <!-- Buttons at the end of the item -->
       <div class="col-auto align-self-end">
         <h3>
-          <font-awesome-icon icon="check" class="ml-2"/> 
-          <font-awesome-icon icon="pencil-alt" class="ml-2"/> 
-          <font-awesome-icon icon="trash-alt" class="ml-2"/>
+          <font-awesome-icon icon="check" fixed-width class="ml-2" v-if="item.completed_at === null"/> 
+          <font-awesome-icon icon="times" fixed-width class="ml-2" v-if="item.completed_at !== null"/> 
+          <font-awesome-icon icon="pencil-alt" fixed-width class="ml-2"/> 
+          <font-awesome-icon icon="trash-alt" fixed-width class="ml-2"/>
         </h3>
       </div>
 
