@@ -5,9 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+
 library.add(faBars)
+library.add(faCaretDown)
+library.add(faCaretUp)
+library.add(faCheck)
+library.add(faPencilAlt)
+library.add(faTrashAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
