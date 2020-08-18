@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="text-center container">
+    <h1 id="title">Ivy List</h1>
     <ToDoItem v-for="item in current_list.todo_items" :key="item.id" :item="item"/>
   </div>
 </template>
@@ -57,5 +58,9 @@ export default {
 <style>
 #app {
   margin-top: 60px;
+}
+
+#title {
+  margin-bottom: 30px;
 }
 </style>
