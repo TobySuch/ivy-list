@@ -1,17 +1,19 @@
 <template>
   <div id="app" class="text-center container">
     <h1 id="title">Ivy List</h1>
-    <ToDoItem v-for="item in current_list.todo_items" :key="item.id" :item="item"/>
+    <LoginForm />
   </div>
 </template>
 
 <script>
-import ToDoItem from './components/ToDoItem.vue'
+//import ToDoItem from './components/ToDoItem.vue'
+import LoginForm from './components/LoginForm.vue'
 
 export default {
   name: 'App',
   components: {
-    ToDoItem
+//    ToDoItem,
+    LoginForm
   },
   data(){
     return {
@@ -53,5 +55,9 @@ export default {
 
 #title {
   margin-bottom: 30px;
+}
+
+.form {
+  display: inline-block;
 }
 </style>
