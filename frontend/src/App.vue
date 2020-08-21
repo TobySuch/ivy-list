@@ -15,15 +15,6 @@ export default {
   },
   data(){
     return {
-      item: {
-        id: 1,
-        title: "Test",
-        description: "This is a test item",
-        created_at: "2020-08-12T13:22:57.586823Z",
-        completed_at: "2020-08-12T14:01:30Z",
-        priority: 1,
-        todo_list: 3
-      },
       current_list: {
         id: 3,
         date: "2020-08-12",
