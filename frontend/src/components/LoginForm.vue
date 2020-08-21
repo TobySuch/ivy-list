@@ -27,14 +27,27 @@ export default {
   },
   methods: {
     login: function() {
-      console.log("Login placeholder");
+      let payload = {
+        email: this.email,
+        password: this.password
+      }
+
+
+      this.axios.post("http://127.0.0.1:8000/token/",
+        JSON.stringify(payload),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          localStorage.access_token = response.data.access;
+          localStorage.refresh_token = response.data.refresh;
+          console.log("Logged in");
+      });
     }
   }
 }
 </script>
 
 <style scoped>
-  .form {
-    max-width: 60%;
-  }
 </style>

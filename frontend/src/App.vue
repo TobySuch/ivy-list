@@ -17,32 +17,8 @@ export default {
   },
   data(){
     return {
-      current_list: {
-        id: 3,
-        date: "2020-08-12",
-        todo_items: [
-            {
-                id: 1,
-                title: "Test",
-                description: "This is a test item",
-                created_at: "2020-08-12T13:22:57.586823Z",
-                completed_at: "2020-08-12T14:01:30Z",
-                priority: 1,
-                todo_list: 3,
-                description_visible: false
-            },
-            {
-                id: 3,
-                title: "Not completed item",
-                description: "This item is not completed",
-                created_at: "2020-08-12T14:11:35.434502Z",
-                completed_at: null,
-                priority: 2,
-                todo_list: 3,
-                description_visible: false
-            }
-        ]
-    }
+      logged_in: false,
+      current_list: null
     }
   }
 }
