@@ -123,12 +123,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# # Django REST Framework settings.
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ],
-# }
+# Django REST Framework settings.
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 
 # Project Specific
 AUTH_USER_MODEL = 'users.User'
