@@ -12,7 +12,7 @@ function guardRoute(to, from, next)
 {
   if(localStorage.getItem('time_set')) {
     let time_set = localStorage.getItem('time_set');
-    if (time_set >= Date.now() - (60 * 60 * 24)) { // Set within the last day
+    if (parseInt(time_set) >= Date.now() - (60 * 60 * 24 * 100)) { // Set within the last day
       next(); // allow to enter route
       return;
     }
