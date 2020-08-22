@@ -1,5 +1,6 @@
 <template>
   <div class="form">
+    <h3>Log In</h3>
     <form action="#">
       <div class="form-group">
         <label for="emailInput">Email address</label>
@@ -9,7 +10,7 @@
         <label for="passwordInput">Password</label>
         <input type="password" class="form-control" id="passwordInput" v-model="password">
       </div>
-      <button type="submit" class="btn btn-primary" @click="login();">Submit</button>
+      <button type="submit" class="btn btn-primary" @click="login();">Log In</button>
     </form>
   </div>
 </template>
