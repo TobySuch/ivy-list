@@ -32,6 +32,24 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
+Vue.mixin({
+  methods: {
+    refresh_token: () => {
+      return axios.post("/token/refresh/",
+        JSON.stringify({
+          refresh: localStorage.getItem("refresh_token")
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          localStorage.access_token = response.data.access;
+        });
+    }
+  }
+})
+
 new Vue({
   router,
   render: h => h(App),

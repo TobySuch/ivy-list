@@ -9,7 +9,35 @@
 
 <script>
 export default {
-  name: "ToDoView"
+  name: "ToDoView",
+  data: function () {
+    return {
+      todo_lists: {}
+    }
+  },
+  methods: {
+    getToDoLists: function() {
+      return this.axios.get("/todo_list/",
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).then((response) => {
+        this.todo_lists = response.data;
+      })
+    }
+  },
+  mounted: function () {
+    this.getToDoLists().catch((error) => {
+      if (error.response.status == 401) {
+        // Authentication error - Refresh access token and try again.
+        this.refresh_token().then(this.getToDoLists);
+      } else {
+        console.error("Error contacting API");
+      }
+    });
+  }
 }
 </script>
 
