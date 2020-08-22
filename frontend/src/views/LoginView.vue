@@ -1,7 +1,7 @@
 <template>
   <div class="form">
     <h3>Log In</h3>
-    <form action="#">
+    <form v-on:submit.prevent="login">
       <div class="form-group">
         <label for="emailInput">Email address</label>
         <input type="email" class="form-control" id="emailInput" v-model="email">
@@ -10,7 +10,7 @@
         <label for="passwordInput">Password</label>
         <input type="password" class="form-control" id="passwordInput" v-model="password">
       </div>
-      <button type="submit" class="btn btn-primary" @click="login();">Log In</button>
+      <button type="submit" class="btn btn-primary">Log In</button>
     </form>
   </div>
 </template>
@@ -33,7 +33,6 @@ export default {
         password: this.password
       }
 
-
       this.axios.post("http://127.0.0.1:8000/token/",
         JSON.stringify(payload),
         {
@@ -43,7 +42,8 @@ export default {
         }).then((response) => {
           localStorage.access_token = response.data.access;
           localStorage.refresh_token = response.data.refresh;
-          console.log("Logged in");
+          localStorage.time_set = Date.now();
+          this.$emit('login');
       });
     }
   }
