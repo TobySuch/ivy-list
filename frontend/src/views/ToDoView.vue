@@ -12,7 +12,18 @@ export default {
   name: "ToDoView",
   data: function () {
     return {
-      todo_lists: {}
+      todo_lists: []
+    }
+  },
+  computed: {
+    most_recent_list: function() {
+      if (this.todo_lists.length > 0) {
+        return [...this.todo_lists].sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        })[0];
+      } else {
+        return null;
+      }
     }
   },
   methods: {
