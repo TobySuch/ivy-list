@@ -61,8 +61,8 @@ export default {
           headers: {
             'Content-Type': 'application/json'
           }
-        }).then(response => {
-          console.log(response.data);
+        }).then(() => {
+          this.login(this.email, this.password);
         }).catch(error => {
           if (error.response.status == 400 && "email" in error.response.data) {
             if (error.response.data.email.includes("user with this email address already exists.")) {
