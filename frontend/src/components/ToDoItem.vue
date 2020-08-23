@@ -55,12 +55,27 @@ export default {
       this.description_visible = false;
     },
     complete: function() {
-      // To do: send request off to server to complete item.
-      this.item.completed_at = true;
+      this.axios.get("/todo_item/" + this.item.id + "/complete/",
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).then(response => {
+
+        this.item.completed_at = response.data.completed_at;
+      });
     },
     uncomplete: function() {
-      // To do: send request off to server to uncomplete item.
-      this.item.completed_at = null;
+      this.axios.get("/todo_item/" + this.item.id + "/uncomplete/",
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).then(response => {
+        this.item.completed_at = response.data.completed_at;
+      });
     }
   }
 }
