@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import HomeView from './views/HomeView'
 import LoginView from './views/LoginView'
+import RegistrationView from './views/RegistrationView'
 import ToDoView from './views/ToDoView'
 
 
@@ -27,6 +28,11 @@ let routes = [
     path: '/login',
     name: 'Log In',
     component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: RegistrationView
   },
   {
     path: '/todo',
