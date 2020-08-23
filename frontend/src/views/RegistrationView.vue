@@ -4,6 +4,7 @@
     <form v-on:submit.prevent="register">
       <div class="form-group">
         <input type="email" class="form-control" id="emailInput" v-model="email" placeholder="Email">
+        <p v-if="this.invalid_emails.includes(this.email)" class="text-danger">This email is already in use.</p>
       </div>
       <div class="form-group">
         <input type="password" class="form-control" id="passwordInput" v-model="password" placeholder="Password">
@@ -36,10 +37,40 @@ export default {
       password: "",
       confirm_password: "",
       first_name: "",
-      last_name: ""
+      last_name: "",
+      invalid_emails: []
     }
   },
   methods: {
+    register: function() {
+      if (this.invalid_emails.includes(this.email) ||
+          this.password !== this.confirm_password) {
+        return;
+      }
+
+      let payload = {
+        email: this.email,
+        password: this.password,
+        first_name: this.first_name,
+        last_name: this.last_name
+      }
+
+      this.axios.post("/users/register",
+        JSON.stringify(payload),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+          console.log(response.data);
+        }).catch(error => {
+          if (error.response.status == 400 && "email" in error.response.data) {
+            if (error.response.data.email.includes("user with this email address already exists.")) {
+              this.invalid_emails.push(this.email);
+            }
+          }
+        });
+    }
   }
 }
 </script>
