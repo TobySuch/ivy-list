@@ -10,6 +10,7 @@
       </div>
       <div class="form-group">
         <input type="password" class="form-control" id="passwordInput2" v-model="confirm_password" placeholder="Confirm Password">
+        <p v-if="this.password.length > 0 && this.confirm_password.length > 0 && this.password !== this.confirm_password" class="text-danger">Passwords must match!</p>
       </div>
       <div class="row form-group">
         <div class="col">
