@@ -10,16 +10,16 @@
       <div class="col">
         <h3 class="title">
           {{ item.title }}
-          <font-awesome-icon icon="caret-down" fixed-width v-show="!item.description_visible" @click="showDescription(item);" class="point_cursor"/>
-          <font-awesome-icon icon="caret-up" fixed-width v-show="item.description_visible" @click="hideDescription(item);" class="point_cursor"/>
+          <font-awesome-icon icon="caret-down" fixed-width v-show="!this.description_visible" @click="showDescription(item);" class="point_cursor"/>
+          <font-awesome-icon icon="caret-up" fixed-width v-show="this.description_visible" @click="hideDescription(item);" class="point_cursor"/>
         </h3>
       </div>
 
       <!-- Buttons at the end of the item -->
       <div class="col-auto align-self-end">
         <h3>
-          <font-awesome-icon icon="check" fixed-width class="ml-2 point_cursor" v-if="item.completed_at === null" @click="complete(item);"/> 
-          <font-awesome-icon icon="times" fixed-width class="ml-2 point_cursor" v-if="item.completed_at !== null" @click="uncomplete(item);"/> 
+          <font-awesome-icon icon="check" fixed-width class="ml-2 point_cursor" v-if="item.completed_at === null" @click="complete();"/> 
+          <font-awesome-icon icon="times" fixed-width class="ml-2 point_cursor" v-if="item.completed_at !== null" @click="uncomplete();"/> 
           <font-awesome-icon icon="pencil-alt" fixed-width class="ml-2 point_cursor"/> 
           <font-awesome-icon icon="trash-alt" fixed-width class="ml-2 point_cursor"/>
         </h3>
@@ -29,7 +29,7 @@
     <!-- To do item description -->
     <div class="row">
       <div class="col-1"></div>
-      <div class="col" v-show="item.description_visible">
+      <div class="col" v-show="this.description_visible">
         <p class="description">{{ item.description }}</p>
       </div>
     </div>
@@ -42,20 +42,40 @@ export default {
   props: {
     item: Object
   },
+  data: function () {
+    return {
+      description_visible: false
+    }
+  },
   methods: {
-    showDescription: function(item) {
-      item.description_visible = true;
+    showDescription: function() {
+      this.description_visible = true;
     },
-    hideDescription: function(item) {
-      item.description_visible = false;
+    hideDescription: function() {
+      this.description_visible = false;
     },
-    complete: function(item) {
-      // To do: send request off to server to complete item.
-      item.completed_at = true;
+    complete: function() {
+      this.axios.get("/todo_item/" + this.item.id + "/complete/",
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).then(response => {
+
+        this.item.completed_at = response.data.completed_at;
+      });
     },
-    uncomplete: function(item) {
-      // To do: send request off to server to uncomplete item.
-      item.completed_at = null;
+    uncomplete: function() {
+      this.axios.get("/todo_item/" + this.item.id + "/uncomplete/",
+        {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).then(response => {
+        this.item.completed_at = response.data.completed_at;
+      });
     }
   }
 }

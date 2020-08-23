@@ -33,7 +33,7 @@ export default {
         password: this.password
       }
 
-      this.axios.post("http://127.0.0.1:8000/token/",
+      this.axios.post("/token/",
         JSON.stringify(payload),
         {
           headers: {
