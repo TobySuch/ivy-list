@@ -12,8 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email']
         )
         user.set_password(validated_data['password'])
-        user.first_name = validated_data['first_name']
-        user.last_name = validated_data['last_name']
+        if 'first_name' in validated_data.keys():
+            user.first_name = validated_data['first_name']
+        if 'last_name' in validated_data.keys():
+            user.last_name = validated_data['last_name']
         user.save()
 
         return user

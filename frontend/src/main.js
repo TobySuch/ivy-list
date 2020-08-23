@@ -55,7 +55,7 @@ axios.interceptors.response.use(response => response, error => {
 
 Vue.mixin({
   methods: {
-    refresh_token: () => {
+    refresh_token: function() {
       return axios.post("/token/refresh/",
         JSON.stringify({
           refresh: localStorage.getItem("refresh_token")
@@ -67,6 +67,25 @@ Vue.mixin({
         }).then((response) => {
           localStorage.access_token = response.data.access;
         });
+    },
+    login: function(email, password) {
+      let payload = {
+        email: email,
+        password: password
+      }
+
+      axios.post("/token/",
+        JSON.stringify(payload),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          localStorage.access_token = response.data.access;
+          localStorage.refresh_token = response.data.refresh;
+          localStorage.time_set = Date.now();
+          this.$emit('login');
+      });
     }
   }
 })
