@@ -32,6 +32,27 @@ Vue.config.productionTip = false
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
+axios.interceptors.response.use(response => response, error => {
+  if (error.response.status == 401 && "Authorization" in error.config.headers) {
+    return axios.post("/token/refresh/",
+        JSON.stringify({
+          refresh: localStorage.getItem("refresh_token")
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          localStorage.access_token = response.data.access;
+          let config = error.config;
+          config.headers.Authorization = "Bearer " + response.data.access;
+          return axios.request(config);
+        });
+  }
+  return Promise.reject(error);
+})
+
+
 Vue.mixin({
   methods: {
     refresh_token: () => {

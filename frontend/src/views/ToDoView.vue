@@ -40,14 +40,7 @@ export default {
     }
   },
   mounted: function () {
-    this.getToDoLists().catch((error) => {
-      if (error.response.status == 401) {
-        // Authentication error - Refresh access token and try again.
-        this.refresh_token().then(this.getToDoLists);
-      } else {
-        console.error("Error contacting API");
-      }
-    });
+    this.getToDoLists();
   }
 }
 </script>
