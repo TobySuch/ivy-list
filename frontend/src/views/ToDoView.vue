@@ -4,6 +4,7 @@
     <div v-if="todo_lists.length > 0">
       <h4>{{ todo_lists[0].date }}</h4>
       <ToDoItem v-for="item in todo_lists[0].todo_items" :key="item.id" :item="item"/>
+      <h4 v-if="todo_lists[0].todo_items.length == 0">Nothing on your to do list!</h4>
     </div>
     <div v-else>
       <h4>No To Do Lists</h4>
