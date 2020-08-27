@@ -14,6 +14,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faBars)
@@ -23,6 +25,8 @@ library.add(faCheck)
 library.add(faTimes)
 library.add(faPencilAlt)
 library.add(faTrashAlt)
+library.add(faArrowCircleLeft)
+library.add(faArrowCircleRight)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -88,6 +92,19 @@ Vue.mixin({
           localStorage.time_set = Date.now();
           this.$emit('login');
       });
+    },
+    formatDate: function(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) 
+          month = '0' + month;
+      if (day.length < 2) 
+          day = '0' + day;
+
+      return [year, month, day].join('-');
     }
   }
 })
