@@ -4,6 +4,7 @@ from .permissions import IsOwner
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+import datetime
 
 class ToDoListViewSet(viewsets.ModelViewSet):
     queryset = ToDoList.objects.all()
@@ -26,7 +27,12 @@ class ToDoListViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return self.request.user.todo_lists.all()
+        queryset =  self.request.user.todo_lists.all()
+        date = self.request.query_params.get('date', None)
+        if date is not None:
+            queryset = queryset.filter(date=date)
+
+        return queryset
 
 class ToDoItemViewSet(viewsets.ModelViewSet):
     queryset = ToDoItem.objects.all()
