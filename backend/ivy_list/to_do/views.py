@@ -1,6 +1,7 @@
 from .models import ToDoList, ToDoItem
 from .serializers import ToDoListSerializer, ToDoItemSerializer
 from .permissions import IsOwner
+from .pagination import StandardResultsSetPagination
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ class ToDoListViewSet(viewsets.ModelViewSet):
     queryset = ToDoList.objects.all()
     serializer_class = ToDoListSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
+    pagination_class = StandardResultsSetPagination
 
     @action(detail=True)
     def completed(self, request, *args, **kwargs):
