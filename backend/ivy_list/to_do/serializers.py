@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 from .models import ToDoList, ToDoItem
 
 class ToDoItemSerializer(serializers.ModelSerializer):
@@ -10,8 +11,12 @@ class ToDoItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'created_at', 'completed_at', 'priority', 'todo_list']
 
 class ToDoListSerializer(serializers.ModelSerializer):
-    date = serializers.ReadOnlyField()
     todo_items = ToDoItemSerializer(many=True, read_only=True)
+
+    def validate_date(self, value):
+        if self.instance and self.instance.date != value:
+            raise ValidationError("You may not edit date!")
+        return value
 
     class Meta:
         model = ToDoList
