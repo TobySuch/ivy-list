@@ -28,4 +28,12 @@ export default {
 .form {
   display: inline-block;
 }
+
+.grab_cursor {
+  cursor: -webkit-grab; cursor: grab;
+}
+
+.point_cursor {
+  cursor: pointer;
+}
 </style>

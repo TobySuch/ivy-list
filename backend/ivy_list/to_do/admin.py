@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import ToDoList, ToDoItem
+from .models import ToDoItem
 
-admin.site.register(ToDoList)
 admin.site.register(ToDoItem)
