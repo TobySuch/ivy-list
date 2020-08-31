@@ -91,14 +91,6 @@ export default {
     background-color: lightgreen
   }
 
-  .grab_cursor {
-    cursor: -webkit-grab; cursor: grab;
-  }
-
-  .point_cursor {
-    cursor: pointer;
-  }
-
   .description {
     margin: 0px;
   }

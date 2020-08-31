@@ -6,11 +6,15 @@
       <ToDoItem v-for="item in todo_list.todo_items" :key="item.id" :item="item"/>
     </div>
     <h4 v-if="todo_list == null || todo_list.todo_items.length == 0">Nothing on your to do list!</h4>
+    <div v-if="this.currentNumberOfItems <= 6">
+      <button class="btn btn-primary" style="margin-top: 10px;" @click="addToDo()">Add To Do</button>
+    </div>
   </div>
 </template>
 
 <script>
 import ToDoItem from '../components/ToDoItem'
+import { createOrGetToDoList } from '../utils/ToDoListUtils'
 
 export default {
   name: "ToDoView",
@@ -24,11 +28,13 @@ export default {
     }
   },
   computed: {
-    /*
-    todo_list_dates: function() {
-      return Object.keys(this.todo_lists).sort().reverse();
+    currentNumberOfItems: function() {
+      if (this.todo_list == null) {
+        return 0;
+      } else {
+        return this.todo_list.todo_items.length;
+      }
     }
-    */
   },
   methods: {
     getToDoList: function(date) {
@@ -44,11 +50,6 @@ export default {
         } else {
           this.todo_list = null;
         }
-        /*
-        response.data.forEach(item => {
-          this.todo_lists[item.date] = item;
-        })
-        */
       });
     },
     nextDay: function() {
@@ -62,6 +63,12 @@ export default {
       d.setDate(d.getDate() - 1);
       this.current_date = d;
       this.getToDoList(this.current_date);
+    },
+    addToDo: function() {
+
+      createOrGetToDoList(this.todo_list, this.formatDate(this.current_date)).then(a => {
+        this.todo_list = a;
+      });
     }
   },
   mounted: function () {
