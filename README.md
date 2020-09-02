@@ -8,4 +8,13 @@ The Ivy Lee method is a way of structuring a to do list in order to maximise pro
 
 This method is meant to help you prioritise what needs to be done the next day, and stops you from getting distracted from trying to multi task.
 
+# Requirements
+## Backend
+Python 3.8 or greater
 
+Django 3.1 or greater
+django-cors-headers 3.4 or greater
+djangorestframework 3.11 or greater
+djangorestframework-simplejwt 4.4 or greater
+
+And their dependencies. All are pip packages that can be installed using the requirements.txt file found in the backend root folder. I reccomend using a virtual environment.
