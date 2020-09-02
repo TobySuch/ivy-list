@@ -21,7 +21,7 @@
           <font-awesome-icon icon="check" fixed-width class="ml-2 point_cursor" v-if="item.completed_at === null" @click="complete();"/> 
           <font-awesome-icon icon="times" fixed-width class="ml-2 point_cursor" v-if="item.completed_at !== null" @click="uncomplete();"/> 
           <font-awesome-icon icon="pencil-alt" fixed-width class="ml-2 point_cursor"/> 
-          <font-awesome-icon icon="trash-alt" fixed-width class="ml-2 point_cursor"/>
+          <font-awesome-icon icon="trash-alt" fixed-width class="ml-2 point_cursor" @click="deleteItem();"/>
         </h3>
       </div>
     </div>
@@ -76,6 +76,20 @@ export default {
       }).then(response => {
         this.item.completed_at = response.data.completed_at;
       });
+    },
+    deleteItem: function() {
+      if (confirm("Are you sure you would like to delete this task?")) {
+        this.axios.delete("/todo_item/" + this.item.id + "/",
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.access_token
+            }
+          }).then(() => {
+            let index = this.$parent.todo_list.indexOf(this.item);
+            this.$parent.todo_list.splice(index, 1);
+          });
+      }
     }
   }
 }
