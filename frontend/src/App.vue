@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <span class="navbar-brand point_cursor" @click="redirectToHome">Ivy List</span>
       <div v-if="loggedIn" class="navbar-nav ml-auto">
+        <span class="nav-link point_cursor" @click="redirectToToDos">Your List</span>
         <span class="nav-link point_cursor" @click="logout">Log Out</span>
       </div>
       <div v-else class="navbar-nav ml-auto">
@@ -41,6 +42,11 @@ export default {
     redirectToHome: function() {
       if (this.$route.name !=="Home") {
         this.$router.push("/");
+      }
+    },
+    redirectToToDos: function() {
+      if (this.$route.name !=="To Do") {
+        this.$router.push("/todo");
       }
     },
     logout: function() {
