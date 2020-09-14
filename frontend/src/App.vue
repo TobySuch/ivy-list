@@ -11,7 +11,7 @@
         <span class="nav-link point_cursor" @click="redirectToRegister">Register</span>
       </div>
     </nav>
-    <router-view v-on:login="login"></router-view>
+    <router-view class="container view" v-on:login="login"></router-view>
   </div>
 </template>
 
@@ -58,7 +58,10 @@ export default {
 #app {
   margin: 0px;
   padding: 0px;
-  /*margin-top: 60px;*/
+}
+
+.view {
+  margin-top: 10px;
 }
 
 #title {
