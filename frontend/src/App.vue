@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="text-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <span class="navbar-brand" @click="redirectToHome">Ivy List</span>
+      <span class="navbar-brand point_cursor" @click="redirectToHome">Ivy List</span>
       <div v-if="loggedIn" class="navbar-nav ml-auto">
         <span class="navbar-text">Hello!</span>
         <span class="nav-link point_cursor" @click="logout">Log Out</span>
