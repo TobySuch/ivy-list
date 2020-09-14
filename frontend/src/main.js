@@ -53,7 +53,7 @@ axios.interceptors.response.use(response => response, error => {
           return axios.request(config);
         });
   } else if (error.response.config.url === "/token/refresh/") {
-    router.push('/login');
+    this.$root.logout();
   }
   return Promise.reject(error);
 })

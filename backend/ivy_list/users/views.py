@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.exceptions import NotAuthenticated
 from .serializers import UserSerializer, UserUpdateSerializer
 
 @api_view(['GET'])
@@ -10,8 +11,11 @@ def user_details(request):
     """
     Returns details on the currently logged in user
     """
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+    if request.user.is_authenticated:
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+    else:
+        raise NotAuthenticated()
 
 @api_view(['POST'])
 def user_create(request):

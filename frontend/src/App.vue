@@ -20,7 +20,8 @@ export default {
   name: 'App',
   data: function() {
     return {
-      loggedIn: false
+      loggedIn: false,
+      user: null
     }
   },
   methods: {
@@ -49,11 +50,27 @@ export default {
       localStorage.removeItem("time_set");
       this.loggedIn = false;
       this.redirectToHome();
+    },
+    loadUserData: function () {
+      this.axios.get("/user/",
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.access_token
+          }
+        }
+      ).then(response => {
+        this.user = response.data;
+        this.loggedIn = true;
+      }).catch(() => {
+      });
     }
+  },
+  mounted: function () {
+    this.loadUserData();
   }
 }
 </script>
-
 <style>
 #app {
   margin: 0px;

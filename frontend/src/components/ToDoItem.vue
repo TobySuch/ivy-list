@@ -62,8 +62,11 @@ export default {
           'Authorization': 'Bearer ' + localStorage.access_token
         }
       }).then(response => {
-
         this.item.completed_at = response.data.completed_at;
+      }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
       });
     },
     uncomplete: function() {
@@ -75,6 +78,10 @@ export default {
         }
       }).then(response => {
         this.item.completed_at = response.data.completed_at;
+      }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
       });
     },
     deleteItem: function() {
@@ -88,7 +95,11 @@ export default {
           }).then(() => {
             let index = this.$parent.todo_list.indexOf(this.item);
             this.$parent.todo_list.splice(index, 1);
-          });
+          }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
+      });
       }
     }
   }
