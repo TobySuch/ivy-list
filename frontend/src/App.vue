@@ -2,7 +2,11 @@
   <div id="app" class="text-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Ivy List</a>
-      <div class="navbar-nav ml-auto">
+      <div v-if="loggedIn" class="navbar-nav ml-auto">
+        <span class="navbar-text">Hello!</span>
+        <span class="nav-link point_cursor" @click="logout">Log Out</span>
+      </div>
+      <div v-else class="navbar-nav ml-auto">
         <span class="nav-link point_cursor" @click="redirectToLogin">Log In</span>
         <span class="nav-link point_cursor" @click="redirectToRegister">Register</span>
       </div>
@@ -21,6 +25,7 @@ export default {
   },
   methods: {
     login: function () {
+      this.loggedIn = true;
       this.$router.push("/todo");
     },
     redirectToLogin: function() {
@@ -28,6 +33,13 @@ export default {
     },
     redirectToRegister: function() {
       this.$router.push("/register");
+    },
+    logout: function() {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("time_set");
+      this.loggedIn = false;
+      this.$router.push("/");
     }
   }
 }
