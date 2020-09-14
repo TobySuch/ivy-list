@@ -9,6 +9,7 @@ import ToDoView from './views/ToDoView'
 
 Vue.use(Router)
 
+/*
 function guardRoute(to, from, next)
 {
   if(localStorage.getItem('time_set')) {
@@ -16,7 +17,7 @@ function guardRoute(to, from, next)
     return;
   }
   next('/login'); // go to '/login';
-}
+}*/
 
 let routes = [
   {
@@ -37,8 +38,8 @@ let routes = [
   {
     path: '/todo',
     name: 'To Do',
-    component: ToDoView,
-    beforeEnter: guardRoute
+    component: ToDoView/*,
+    beforeEnter: guardRoute*/
   }
 ]
 

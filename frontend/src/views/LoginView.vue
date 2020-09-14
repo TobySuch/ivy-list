@@ -10,7 +10,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Log In</button>
     </form>
-    <a href="/register"><button class="btn btn-link">Don't have an account?</button></a>
+    <button class="btn btn-link" @click="this.$parent.redirectToRegister">Don't have an account?</button>
   </div>
 </template>
 

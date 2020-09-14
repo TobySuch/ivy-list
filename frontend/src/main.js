@@ -52,8 +52,6 @@ axios.interceptors.response.use(response => response, error => {
           config.headers.Authorization = "Bearer " + response.data.access;
           return axios.request(config);
         });
-  } else if (error.response.config.url === "/token/refresh/") {
-    router.push('/login');
   }
   return Promise.reject(error);
 })

@@ -24,7 +24,7 @@
       <small class="form-text text-muted">These aren't required!</small>
       <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Register</button>
     </form>
-    <a href="/login"><button class="btn btn-link">Already have an account?</button></a>
+    <button class="btn btn-link" @click="this.$parent.redirectToLogin">Already have an account?</button>
   </div>
 </template>
 

@@ -58,6 +58,10 @@ export default {
         }
       }).then(response => {
         this.todo_list = response.data.results
+      }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
       });
     },
     nextDay: function() {
@@ -99,6 +103,10 @@ export default {
           description: ''
          }
 
+      }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
       });
     }
 
