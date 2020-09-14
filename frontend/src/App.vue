@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="text-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Ivy List</a>
+      <span class="navbar-brand" @click="redirectToHome">Ivy List</span>
       <div v-if="loggedIn" class="navbar-nav ml-auto">
         <span class="navbar-text">Hello!</span>
         <span class="nav-link point_cursor" @click="logout">Log Out</span>
@@ -29,17 +29,26 @@ export default {
       this.$router.push("/todo");
     },
     redirectToLogin: function() {
-      this.$router.push("/login");
+      if (this.$route.name !=="Log In") {
+        this.$router.push("/login");
+      }
     },
     redirectToRegister: function() {
-      this.$router.push("/register");
+      if (this.$route.name !=="Register") {
+        this.$router.push("/register");
+      }
+    },
+    redirectToHome: function() {
+      if (this.$route.name !=="Home") {
+        this.$router.push("/");
+      }
     },
     logout: function() {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
       localStorage.removeItem("time_set");
       this.loggedIn = false;
-      this.$router.push("/");
+      this.redirectToHome();
     }
   }
 }
