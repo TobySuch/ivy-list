@@ -7,15 +7,10 @@ import VueAxios from 'vue-axios'
 import router from './router.js'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
-import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faBars, faCaretDown, faCaretUp, faCheck, faTimes, faPencilAlt,
+  faTrashAlt, faArrowCircleLeft, faArrowCircleRight 
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faBars)
