@@ -58,7 +58,9 @@ export default {
           'Authorization': 'Bearer ' + localStorage.access_token
         }
       }).then(response => {
-        this.todo_list = response.data.results
+        this.todo_list = response.data.results.sort((a, b) => {
+          return a.priority - b.priority;
+        });
       }).catch(err => {
         if (err.response.status >= 400 & err.response.status <= 401) {
           this.$router.push("/login");
