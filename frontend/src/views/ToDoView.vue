@@ -2,7 +2,7 @@
   <div>
     <h3>Here is your to do list for:</h3>
     <h4><font-awesome-icon icon="arrow-circle-left" fixed-width @click="previousDay();" class="point_cursor"/> {{ this.formatDate(current_date) }} <font-awesome-icon icon="arrow-circle-right" fixed-width @click="nextDay();" class="point_cursor"/></h4>
-    <div v-if="todo_list.length > 0">
+    <div id="task-list">
       <ToDoItem v-for="item in todo_list" :key="item.id" :item="item"/>
     </div>
     <h4 v-if="todo_list.length == 0 && !in_creation">Nothing on your to do list!</h4>
@@ -29,6 +29,7 @@
 
 <script>
 import ToDoItem from '../components/ToDoItem'
+import Sortable from "sortablejs";
 
 export default {
   name: "ToDoView",
@@ -114,6 +115,10 @@ export default {
   mounted: function () {
     this.current_date = new Date();
     this.getToDoList(this.current_date);
+    var sortableList = document.getElementById("task-list");
+    Sortable.create(sortableList, {
+      handle: '.drag-handle',
+      animation: 150});
   }
 }
 </script>

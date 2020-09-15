@@ -1,9 +1,9 @@
 <template>
-  <div v-bind:id="'ToDoItem-' + item.id" class="ToDoItem mt-2 row d-block rounded text-justify container align-items-top" v-bind:class="{ completed: item.completed_at !== null }">
+  <div v-bind:id="'ToDoItem-' + item.id" class="ToDoItem mt-2 row d-block rounded text-justify container align-items-top" v-bind:class="{ completed: item.completed_at !== null }" v-bind:data-itemid="item.id">
     <div class="row">
       <!-- Hamburger menu to reorder to do items -->
       <div class="col-1">
-        <h3><font-awesome-icon icon="bars" fixed-width class="grab_cursor"/></h3>
+        <h3><font-awesome-icon icon="bars" fixed-width class="grab_cursor drag-handle"/></h3>
       </div>
 
       <!-- Title of to do item -->
