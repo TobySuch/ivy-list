@@ -109,6 +109,25 @@ export default {
           this.$router.push("/login");
         }
       });
+    },
+    updateItem: function(item) {
+      return this.axios.put("/todo_item/" + item.id + "/",
+      {
+        title: item.title,
+        description: item.description,
+        date: item.date,
+        priority: item.priority
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.access_token
+        }
+      }).catch(err => {
+        if (err.response.status >= 400 & err.response.status <= 401) {
+          this.$router.push("/login");
+        }
+      });
     }
 
   },
@@ -118,7 +137,21 @@ export default {
     var sortableList = document.getElementById("task-list");
     Sortable.create(sortableList, {
       handle: '.drag-handle',
-      animation: 150});
+      animation: 150,
+      onEnd: evnt => {
+        for (let i = 0; i < evnt.to.childNodes.length; i++) {
+          let id = evnt.to.childNodes[i].attributes["data-itemid"].nodeValue;
+          let task = this.todo_list.find(el => {
+            return el.id == id;
+          });
+          if (task.priority != i + 1) {
+            // Only send an update if the priority has actually changed.
+            task.priority = i + 1;
+            this.updateItem(task);
+          }
+        }
+      }
+    });
   }
 }
 </script>

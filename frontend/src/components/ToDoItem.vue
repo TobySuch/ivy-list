@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:id="'ToDoItem-' + item.id" class="ToDoItem mt-2 row d-block rounded text-justify container align-items-top" v-bind:class="{ completed: item.completed_at !== null }" v-bind:data-itemid="item.id">
+  <div v-bind:id="'ToDoItem-' + item.id" class="ToDoItem mt-2 row d-block rounded text-justify container align-items-top" v-bind:class="{ completed: item.completed_at !== null }" v-bind:data-itemid="item.id" v-bind:data-priority="item.priority">
     <div class="row">
       <!-- Hamburger menu to reorder to do items -->
       <div class="col-1">
