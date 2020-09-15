@@ -16,6 +16,7 @@
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "sortablejs": "^1.11.2-alpha.3",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.4.3"
