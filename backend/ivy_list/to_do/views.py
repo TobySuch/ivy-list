@@ -29,10 +29,15 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def perform_create(self, serializer):
-        number_of_tasks_today = ToDoItem.objects.filter(
-            owner=self.request.user, date=serializer.validated_data["date"]).count()
+        if "priority" not in serializer.validated_data.keys():
+            number_of_tasks_today = ToDoItem.objects.filter(
+                owner=self.request.user, date=serializer.validated_data["date"]).count()
+            priority=number_of_tasks_today + 1
+        else:
+            priority = serializer.validated_data["priority"]
+
         serializer.save(owner=self.request.user,
-            priority=number_of_tasks_today + 1)
+            priority=priority)
 
     def get_queryset(self):
         queryset =  self.request.user.todo_items.all()
