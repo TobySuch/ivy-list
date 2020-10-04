@@ -45,5 +45,5 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
         if date is not None:
             queryset = queryset.filter(date=date)
 
-        queryset = queryset.order_by('-date')
+        queryset = queryset.order_by('-date', '-priority')
         return queryset
